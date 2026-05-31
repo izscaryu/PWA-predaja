@@ -1,0 +1,323 @@
+/* ===== CalisthenicsHR - vanjski stil za sve stranice ===== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    background-color: #f4f4f4;
+    color: #1f1f1f;
+    line-height: 1.6;
+}
+
+/* ---------- Zaglavlje (header) ---------- */
+header {
+    background-color: #1a1a2e;
+    color: #ffffff;
+    padding: 28px 20px 0 20px;
+    text-align: center;
+    border-bottom: 4px solid #e94560;
+}
+
+.logo {
+    font-size: 44px;
+    letter-spacing: 1px;
+}
+
+.logo a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.tagline {
+    font-style: italic;
+    font-size: 15px;
+    color: #c6c6d8;
+    margin-top: 4px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+/* ---------- Navigacija (nav) ---------- */
+nav {
+    margin-top: 20px;
+    border-top: 1px solid #33334d;
+    padding: 12px 0;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 14px;
+    padding: 4px 0;
+}
+
+nav a:hover {
+    color: #e94560;
+    border-bottom: 2px solid #e94560;
+}
+
+/* ---------- Tijelo stranice (content) ---------- */
+main {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 0 20px;
+    background-color: #f4f4f4;
+}
+
+/* Naslov kategorije unutar sekcije */
+.category-heading {
+    font-size: 26px;
+    font-weight: bold;
+    border-bottom: 3px solid #e94560;
+    display: inline-block;
+    padding-bottom: 4px;
+    margin: 30px 0 20px 0;
+    text-transform: capitalize;
+}
+
+/* ---------- Red sa člancima (4 po redu) ---------- */
+.articles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+    margin-bottom: 20px;
+}
+
+.articles article {
+    flex: 1 1 calc(25% - 22px);
+    min-width: 200px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    padding-bottom: 12px;
+}
+
+.articles article img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+}
+
+.articles .title {
+    font-size: 17px;
+    line-height: 1.3;
+    margin: 12px 12px 8px 12px;
+}
+
+.articles .title a {
+    color: #1a1a2e;
+    text-decoration: none;
+}
+
+.articles .title a:hover {
+    color: #e94560;
+}
+
+.articles .summary {
+    font-size: 13px;
+    color: #555555;
+    margin: 0 12px;
+}
+
+/* ---------- Pojedinačni članak (clanak.php / skripta.php) ---------- */
+section[role="main"] {
+    max-width: 760px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 30px 40px 40px 40px;
+    border: 1px solid #e0e0e0;
+}
+
+.article-full .category {
+    text-transform: uppercase;
+    color: #e94560;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.article-full .category span::before {
+    content: "\25A0  ";
+}
+
+.article-full .title {
+    font-size: 34px;
+    line-height: 1.2;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.article-full .meta {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #888888;
+    margin-bottom: 20px;
+}
+
+.article-full .meta span {
+    color: #1a1a2e;
+    font-weight: bold;
+}
+
+.article-full .slika img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.article-full .about p {
+    font-style: italic;
+    font-size: 18px;
+    color: #444444;
+    border-left: 3px solid #e94560;
+    padding-left: 16px;
+    margin-bottom: 20px;
+}
+
+.article-full .sadrzaj p {
+    font-size: 16px;
+    text-align: justify;
+}
+
+/* ---------- Forme (unos.php, registracija.php, administrator.php) ---------- */
+.form-wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border: 1px solid #e0e0e0;
+}
+
+.page-title {
+    font-size: 28px;
+    border-bottom: 3px solid #e94560;
+    display: inline-block;
+    padding-bottom: 4px;
+    margin-bottom: 24px;
+}
+
+.form-item {
+    margin-bottom: 16px;
+}
+
+.form-item label {
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.form-field-textual {
+    width: 100%;
+    padding: 8px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    border: 1px solid #cccccc;
+}
+
+textarea.form-field-textual {
+    resize: vertical;
+}
+
+button {
+    background-color: #1a1a2e;
+    color: #ffffff;
+    border: none;
+    padding: 10px 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin-right: 8px;
+    margin-top: 8px;
+}
+
+button:hover {
+    background-color: #e94560;
+}
+
+/* Poruke kod JavaScript validacije */
+.bojaPoruke {
+    color: #e94560;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* Administracija - pojedinačne forme za zapise */
+.admin-record {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    margin-bottom: 24px;
+}
+
+.admin-record img {
+    border: 1px solid #cccccc;
+    margin-top: 6px;
+}
+
+.info-msg {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-left: 4px solid #e94560;
+    padding: 20px;
+    max-width: 640px;
+    margin: 0 auto;
+    font-size: 18px;
+}
+
+.info-msg a {
+    color: #e94560;
+}
+
+/* ---------- Podnožje (footer) ---------- */
+footer {
+    background-color: #1a1a2e;
+    color: #c6c6d8;
+    text-align: center;
+    padding: 22px 20px;
+    margin-top: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    border-top: 4px solid #e94560;
+}
+
+/* ---------- Responzivnost ---------- */
+@media (max-width: 900px) {
+    .articles article {
+        flex: 1 1 calc(50% - 22px);
+    }
+}
+
+@media (max-width: 540px) {
+    .articles article {
+        flex: 1 1 100%;
+    }
+    .logo {
+        font-size: 32px;
+    }
+    nav a {
+        display: inline-block;
+        margin: 4px 8px;
+    }
+    section[role="main"] {
+        padding: 20px;
+    }
+}

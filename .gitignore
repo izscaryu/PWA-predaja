@@ -1,0 +1,12 @@
+/.claude/
+calisthenicshr.sql
+# OS
+Thumbs.db
+.DS_Store
+
+# Environment
+.env
+
+# Node / PHP deps
+/node_modules/
+/vendor/
