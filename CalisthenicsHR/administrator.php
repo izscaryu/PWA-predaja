@@ -7,7 +7,6 @@ $uspjesnaPrijava = false;
 $admin = false;
 $imeKorisnika = '';
 
-// ---------- Odjava ----------
 if (isset($_GET['logout'])) {
     session_unset();
     session_destroy();
@@ -15,11 +14,9 @@ if (isset($_GET['logout'])) {
     exit;
 }
 
-// ---------- Prijava (login) ----------
 if (isset($_POST['prijava'])) {
     $prijavaImeKorisnika = $_POST['username'];
 
-    // Dohvat korisnika prepared statementom (zaštita od SQL injectiona)
     $sql = "SELECT korisnicko_ime, lozinka, razina FROM korisnik WHERE korisnicko_ime = ?";
     $stmt = mysqli_stmt_init($dbc);
     if (mysqli_stmt_prepare($stmt, $sql)) {
@@ -30,7 +27,6 @@ if (isset($_POST['prijava'])) {
         mysqli_stmt_fetch($stmt);
     }
 
-    // Provjera lozinke
     if (mysqli_stmt_num_rows($stmt) > 0 && password_verify($_POST['lozinka'], $lozinkaKorisnika)) {
         $uspjesnaPrijava = true;
         $admin = ($levelKorisnika == 1);
@@ -42,11 +38,9 @@ if (isset($_POST['prijava'])) {
     mysqli_stmt_close($stmt);
 }
 
-// Je li trenutni posjetitelj administrator (po prijavi ili po sesiji)?
 $jeAdmin = ($uspjesnaPrijava && $admin) || (isset($_SESSION['username']) && $_SESSION['level'] == 1);
 $loggedIn = isset($_SESSION['username']) || $uspjesnaPrijava;
 
-// ---------- Brisanje zapisa (samo administrator) ----------
 if ($jeAdmin && isset($_POST['delete'])) {
     $id = (int) $_POST['id'];
     $sql = "DELETE FROM vijesti WHERE id = ?";
@@ -58,7 +52,6 @@ if ($jeAdmin && isset($_POST['delete'])) {
     }
 }
 
-// ---------- Izmjena zapisa (samo administrator) ----------
 if ($jeAdmin && isset($_POST['update'])) {
     $id       = (int) $_POST['id'];
     $title    = $_POST['title'];
@@ -67,7 +60,6 @@ if ($jeAdmin && isset($_POST['update'])) {
     $category = $_POST['category'];
     $archive  = isset($_POST['archive']) ? 1 : 0;
 
-    // Nova slika samo ako je valjana slika; inače zadrži postojeću (provjerenu)
     $picture = 'placeholder.jpg';
     if (isset($_POST['trenutna_slika'])) {
         $cisto = cistNazivSlike($_POST['trenutna_slika']);
@@ -89,7 +81,6 @@ if ($jeAdmin && isset($_POST['update'])) {
     }
 }
 
-// ---------- Novi članak (samo administrator) ----------
 if ($jeAdmin && isset($_POST['insert'])) {
     $title    = $_POST['title'];
     $about    = $_POST['about'];
@@ -98,8 +89,6 @@ if ($jeAdmin && isset($_POST['insert'])) {
     $date     = date('d.m.Y.');
     $archive  = isset($_POST['archive']) ? 1 : 0;
 
-    // Naziv slike: provjereni ručni naziv, pa sigurno učitana datoteka, inače placeholder.
-    // Dozvoljene su samo slike (jpg/jpeg/png/gif).
     $picture = 'placeholder.jpg';
     if (isset($_POST['slika_naziv'])) {
         $cisto = cistNazivSlike($_POST['slika_naziv']);

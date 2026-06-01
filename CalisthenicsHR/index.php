@@ -3,11 +3,9 @@ session_start();
 include 'connect.php';
 define('UPLPATH', 'img/');
 
-// Tab "Unos" vidljiv samo administratoru (razina 1); Odjava vidljiva prijavljenima
 $navAdmin = (isset($_SESSION['level']) && $_SESSION['level'] == 1);
 $loggedIn = isset($_SESSION['username']);
 
-// Ispisuje red članaka za zadanu kategoriju koristeći prepared statement
 function prikaziKategoriju($dbc, $kategorija, $naslovSekcije, $limit) {
     echo '<section>';
     echo '<h2 class="category-heading">' . $naslovSekcije . '</h2>';
@@ -59,9 +57,40 @@ function prikaziKategoriju($dbc, $kategorija, $naslovSekcije, $limit) {
 
     <main>
         <?php
-        prikaziKategoriju($dbc, 'treninzi', 'Treninzi', 4);
-        prikaziKategoriju($dbc, 'vjezbe', 'Vježbe', 4);
-        mysqli_close($dbc);
+        if (isset($DB_CONNECT_ERROR) && $DB_CONNECT_ERROR) {
+            echo '<p style="color:#b33;">Upozorenje: baza nije dostupna — prikazujem statični preview.</p>';
+
+            function prikaziKategorijuFallback($kategorija, $naslovSekcije, $limit) {
+                echo '<section>';
+                echo '<h2 class="category-heading">' . $naslovSekcije . '</h2>';
+                echo '<div class="articles">';
+
+                $images = glob(UPLPATH . '*.png');
+                if (!$images) { $images = glob(UPLPATH . '*.jpg'); }
+                $count = 0;
+                foreach ($images as $img) {
+                    if ($count >= $limit) break;
+                    $title = pathinfo($img, PATHINFO_FILENAME);
+                    echo '<article>';
+                    echo '<img src="' . $img . '" alt="' . htmlspecialchars($title) . '">';
+                    echo '<h3 class="title"><a href="#">' . htmlspecialchars(str_replace('-', ' ', $title)) . '</a></h3>';
+                    echo '<p class="summary">Primjer sažetka članka za pregled izgleda stranice.</p>';
+                    echo '</article>';
+                    $count++;
+                }
+
+                echo '</div>';
+                echo '</section>';
+            }
+
+            prikaziKategorijuFallback('treninzi', 'Treninzi', 4);
+            prikaziKategorijuFallback('vjezbe', 'Vježbe', 4);
+
+        } else {
+            prikaziKategoriju($dbc, 'treninzi', 'Treninzi', 4);
+            prikaziKategoriju($dbc, 'vjezbe', 'Vjezbe', 4);
+            mysqli_close($dbc);
+        }
         ?>
     </main>
 

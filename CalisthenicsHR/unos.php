@@ -1,7 +1,6 @@
 <?php
 session_start();
 include 'connect.php';
-// Unos je dozvoljen samo administratoru (razina 1); Odjava vidljiva prijavljenima
 $navAdmin = (isset($_SESSION['level']) && $_SESSION['level'] == 1);
 $loggedIn = isset($_SESSION['username']);
 ?>

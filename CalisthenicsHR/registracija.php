@@ -2,7 +2,6 @@
 session_start();
 include 'connect.php';
 
-// Tab "Unos" vidljiv samo administratoru (razina 1); Odjava vidljiva prijavljenima
 $navAdmin = (isset($_SESSION['level']) && $_SESSION['level'] == 1);
 $loggedIn = isset($_SESSION['username']);
 
@@ -17,7 +16,6 @@ if (isset($_POST['username'])) {
     $hashed_password = password_hash($lozinka, PASSWORD_BCRYPT);
     $razina = 0;
 
-    // Provjera postoji li već korisnik s tim korisničkim imenom (prepared statement)
     $sql = "SELECT korisnicko_ime FROM korisnik WHERE korisnicko_ime = ?";
     $stmt = mysqli_stmt_init($dbc);
     if (mysqli_stmt_prepare($stmt, $sql)) {
@@ -29,7 +27,6 @@ if (isset($_POST['username'])) {
     if (mysqli_stmt_num_rows($stmt) > 0) {
         $msg = 'Korisničko ime već postoji!';
     } else {
-        // Registracija novog korisnika (prepared statement)
         $sql = "INSERT INTO korisnik (ime, prezime, korisnicko_ime, lozinka, razina) VALUES (?, ?, ?, ?, ?)";
         $stmt = mysqli_stmt_init($dbc);
         if (mysqli_stmt_prepare($stmt, $sql)) {

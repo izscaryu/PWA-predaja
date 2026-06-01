@@ -1,5 +1,3 @@
-/* ===== CalisthenicsHR - vanjski stil za sve stranice ===== */
-
 * {
     margin: 0;
     padding: 0;
@@ -13,7 +11,6 @@ body {
     line-height: 1.6;
 }
 
-/* ---------- Zaglavlje (header) ---------- */
 header {
     background-color: #1a1a2e;
     color: #ffffff;
@@ -41,7 +38,6 @@ header {
     text-transform: uppercase;
 }
 
-/* ---------- Navigacija (nav) ---------- */
 nav {
     margin-top: 20px;
     border-top: 1px solid #33334d;
@@ -65,7 +61,6 @@ nav a:hover {
     border-bottom: 2px solid #e94560;
 }
 
-/* ---------- Tijelo stranice (content) ---------- */
 main {
     max-width: 1100px;
     margin: 30px auto;
@@ -73,7 +68,6 @@ main {
     background-color: #f4f4f4;
 }
 
-/* Naslov kategorije unutar sekcije */
 .category-heading {
     font-size: 26px;
     font-weight: bold;
@@ -84,7 +78,6 @@ main {
     text-transform: capitalize;
 }
 
-/* ---------- Red sa člancima (4 po redu) ---------- */
 .articles {
     display: flex;
     flex-wrap: wrap;
@@ -128,7 +121,6 @@ main {
     margin: 0 12px;
 }
 
-/* ---------- Pojedinačni članak (clanak.php / skripta.php) ---------- */
 section[role="main"] {
     max-width: 760px;
     margin: 0 auto;
@@ -192,7 +184,6 @@ section[role="main"] {
     text-align: justify;
 }
 
-/* ---------- Forme (unos.php, registracija.php, administrator.php) ---------- */
 .form-wrap {
     max-width: 640px;
     margin: 0 auto;
@@ -252,7 +243,6 @@ button:hover {
     background-color: #e94560;
 }
 
-/* Poruke kod JavaScript validacije */
 .bojaPoruke {
     color: #e94560;
     font-family: Arial, Helvetica, sans-serif;
@@ -260,7 +250,6 @@ button:hover {
     font-weight: bold;
 }
 
-/* Administracija - pojedinačne forme za zapise */
 .admin-record {
     background-color: #ffffff;
     border: 1px solid #e0e0e0;
@@ -287,7 +276,6 @@ button:hover {
     color: #e94560;
 }
 
-/* ---------- Podnožje (footer) ---------- */
 footer {
     background-color: #1a1a2e;
     color: #c6c6d8;
@@ -299,7 +287,6 @@ footer {
     border-top: 4px solid #e94560;
 }
 
-/* ---------- Responzivnost ---------- */
 @media (max-width: 900px) {
     .articles article {
         flex: 1 1 calc(50% - 22px);

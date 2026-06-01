@@ -1,12 +1,7 @@
--- Sanitized CalisthenicsHR database schema for public repo
--- NOTE: This file contains only the schema (no user data or INSERTs).
--- Import original private dump locally if you need sample data.
-
 CREATE DATABASE IF NOT EXISTS calisthenicshr
     DEFAULT CHARACTER SET utf8 COLLATE utf8_croatian_ci;
 USE calisthenicshr;
 
--- ---------- Tablica vijesti ----------
 DROP TABLE IF EXISTS vijesti;
 CREATE TABLE vijesti (
     id INT(11) NOT NULL AUTO_INCREMENT,
@@ -20,7 +15,6 @@ CREATE TABLE vijesti (
     PRIMARY KEY (id)
 );
 
--- ---------- Tablica korisnik ----------
 DROP TABLE IF EXISTS korisnik;
 CREATE TABLE korisnik (
     id INT(11) NOT NULL AUTO_INCREMENT,
@@ -31,7 +25,3 @@ CREATE TABLE korisnik (
     razina TINYINT(1),
     PRIMARY KEY (id)
 );
-
--- Sample placeholder user (replace with real data locally)
--- INSERT INTO korisnik (ime, prezime, korisnicko_ime, lozinka, razina) VALUES
--- ('Example', 'User', 'example', '<PLACEHOLDER_HASH>', 0);

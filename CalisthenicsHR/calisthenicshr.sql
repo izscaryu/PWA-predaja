@@ -1,13 +1,7 @@
--- ============================================================
---  CalisthenicsHR - baza podataka
---  Uvoz: phpMyAdmin -> Import -> odaberi ovu datoteku
--- ============================================================
-
 CREATE DATABASE IF NOT EXISTS calisthenicshr
     DEFAULT CHARACTER SET utf8 COLLATE utf8_croatian_ci;
 USE calisthenicshr;
 
--- ---------- Tablica vijesti ----------
 DROP TABLE IF EXISTS vijesti;
 CREATE TABLE vijesti (
     id INT(11) NOT NULL AUTO_INCREMENT,
@@ -21,7 +15,6 @@ CREATE TABLE vijesti (
     PRIMARY KEY (id)
 );
 
--- ---------- Tablica korisnik ----------
 DROP TABLE IF EXISTS korisnik;
 CREATE TABLE korisnik (
     id INT(11) NOT NULL AUTO_INCREMENT,
@@ -33,28 +26,25 @@ CREATE TABLE korisnik (
     PRIMARY KEY (id)
 );
 
--- ---------- Primjeri vijesti ----------
--- Slike: u stupcu "slika" je naziv datoteke koju ubaciš u mapu img/.
--- Tekst koristi prijelome redaka koji se na stranici prikazuju kao novi redovi.
 INSERT INTO vijesti (datum, naslov, sazetak, tekst, slika, kategorija, arhiva) VALUES
-('26.05.2026.', '100 sklekova na dan - 30-day challenge',
- 'Sto sklekova kroz dan nije magija, nego razbijanje broja na manje serije.',
- 'Sto push-upova u nizu zvuči nemoguće dok ne shvatiš trik: razbij broj na manje serije kroz cijeli dan.\n\nKako izgleda mjesec:\nTjedan 1 - 5 serija po 40% maxa, pauza 90 s.\nTjedan 2 - 6 serija, pauza skraćena na 75 s.\nTjedan 3 - ubaci slow negatives, 3 sekunde spuštanja.\nTjedan 4 - gusti volumen plus jedna duga serija navečer.\n\nForma > brojka. Prsa do poda, ruke do kraja ispružene, trup napet ko daska. Čim forma popusti, stani - ego ponovke ne računaju.',
+('26.05.2026.', '100 push-ups na dan - 30-day challenge',
+ 'Sto push-ups kroz dan nije magija, nego razbijanje broja na manje serije.',
+ 'Sto push-ups u nizu zvuči nemoguće dok ne shvatiš trik: razbij broj na manje serije kroz cijeli dan.\n\nKako izgleda mjesec:\nTjedan 1 - 5 serija po 40% maxa, pauza 90 s.\nTjedan 2 - 6 serija, pauza skraćena na 75 s.\nTjedan 3 - ubaci slow negatives, 3 sekunde spuštanja.\nTjedan 4 - gusti volumen plus jedna duga serija navečer.\n\nForma > brojka. Prsa do poda, ruke do kraja ispružene, trup napet ko daska. Čim forma popusti, stani - ego ponovke ne računaju.',
  'sklekovi.png', 'treninzi', 0),
 
 ('25.05.2026.', 'Pull-up od nule do 10',
- 'Prvi čisti zgib je najteži. Evo puta od mrtvog visa do deset ponovki.',
- 'Skoro svi zapnu na prvom zgibu. Problem rijetko je snaga - češće je tehnika i nedostatak strpljenja.\n\nProgresija, korak po korak:\nMrtvi vis 30 s - naviknite hvat i ramena.\nScapular pulls 3x8 - nauči spustiti lopatice prije povlačenja.\nNegative pull-ups 4x5 - spuštaj se polako, 3 do 5 sekundi.\nBand-assisted zgibovi - guma skida dio težine.\n\nTreniraj 3x tjedno s danom odmora između. Kad osjetiš da vučeš leđima, a ne samo rukama, prvih deset dolazi brže nego što misliš.',
+ 'Prvi čisti pull-up je najteži. Evo puta od dead hanga do deset ponovki.',
+ 'Skoro svi zapnu na prvom pull-upu. Problem rijetko je snaga - češće je tehnika i nedostatak strpljenja.\n\nProgresija, korak po korak:\nDead hang 30 s - naviknite hvat i ramena.\nScapular pulls 3x8 - nauči spustiti lopatice prije povlačenja.\nNegative pull-ups 4x5 - spuštaj se polako, 3 do 5 sekundi.\nBand-assisted pull-ups - guma skida dio težine.\n\nTreniraj 3x tjedno s danom odmora između. Kad osjetiš da vučeš leđima, a ne samo rukama, prvih deset dolazi brže nego što misliš.',
  'zgibovi.png', 'treninzi', 0),
 
 ('24.05.2026.', 'Push Pull Legs - bodyweight verzija',
  'Klasični PPL split bez tereta, samo vlastito tijelo.',
- 'PPL dijeli trening na guranje, povlačenje i noge. Radi jednako dobro i bez utega.\n\nPush: push-ups, dips, pike push-ups.\nPull: pull-ups, australski zgibovi, face pull s gumom.\nLegs: čučnjevi, lunges, pistol progresije, podizanje na prste.\n\nIde 3 ili 6 dana tjedno. Svaka skupina dobije dovoljno volumena i pun oporavak.\n\nProgress: dodaj ponovku ili težu varijantu svaki tjedan. To je progressive overload, samo s vlastitom težinom umjesto pločica.',
+ 'PPL dijeli trening na guranje, povlačenje i noge. Radi jednako dobro i bez utega.\n\nPush: push-ups, dips, pike push-ups.\nPull: pull-ups, australian pull-ups, face pull s gumom.\nLegs: squats, lunges, pistol progresije, calf raises.\n\nIde 3 ili 6 dana tjedno. Svaka skupina dobije dovoljno volumena i pun oporavak.\n\nProgress: dodaj ponovku ili težu varijantu svaki tjedan. To je progressive overload, samo s vlastitom težinom umjesto pločica.',
  'ppl.png', 'treninzi', 0),
 
 ('23.05.2026.', 'Mobility za ramena prije treninga',
  'Pet minuta koje ti čuvaju ramena i otključavaju handstand.',
- 'Ako te ramena stežu u handstandu ili overhead pokretima, problem je najčešće mobility, ne snaga.\n\nKratka rutina prije treninga:\nKruženje rukama - 2x15.\nShoulder dislocates s palicom ili gumom - 3x10.\nMrtvi vis - 3x20 s.\nWall slides (zid-anđeli) - 3x10.\n\nSve polako i kontrolirano, bez trzaja. Pet do osam minuta dnevno i razlika se vidi za par tjedana.',
+ 'Ako te ramena stežu u handstandu ili overhead pokretima, problem je najčešće mobility, ne snaga.\n\nKratka rutina prije treninga:\nKruženje rukama - 2x15.\nShoulder dislocates s palicom ili gumom - 3x10.\nDead hang - 3x20 s.\nWall slides (zid-anđeli) - 3x10.\n\nSve polako i kontrolirano, bez trzaja. Pet do osam minuta dnevno i razlika se vidi za par tjedana.',
  'mobilnost-ramena.png', 'treninzi', 0),
 
 ('22.05.2026.', 'Prehrana za kalisteniju',
@@ -77,9 +67,9 @@ INSERT INTO vijesti (datum, naslov, sazetak, tekst, slika, kategorija, arhiva) V
  'Muscle up je trenutak kad kalistenija postane efektna. Ali traži bazu.\n\nPrije nego krećeš: 10+ čistih zgibova i 10+ dipova.\n\nProgresije:\nExplosive pull-ups do prsa.\nHigh pulls s povlačenjem prema naprijed (luk, ne ravno gore).\nBand-assisted muscle up.\nNegative muscle up - spuštaj polako, 4x3.\n\nNauči false grip za stabilan prijelaz. Najčešća greška: premali zamah i prerano savijanje laktova. Timing pobjeđuje snagu.',
  'muscle-up.png', 'vjezbe', 0),
 
-('18.05.2026.', 'Pistol squat - single leg čučanj',
+('18.05.2026.', 'Pistol squat - single leg squat',
  'Snaga, balans i mobilnost gležnja u jednoj vježbi.',
- 'Pistol izgleda kao trik, ali je ozbiljan test snage nogu.\n\nNajčešće greške:\nPeta se diže - radi na mobility gležnja.\nKoljeno upada prema unutra.\nLeđa se grbe na dnu.\n\nProgresija:\nČučanj na klupu (box squat) na jednoj nozi.\nPistol uz oslonac rukom za okvir vrata.\nSpori eccentric, 3-5 s spuštanja.\nPuni pistol.\n\nCilj: 3x5 po nozi čisto. Jedna jaka noga vuče gore sve ostale vježbe za noge.',
+ 'Pistol izgleda kao trik, ali je ozbiljan test snage nogu.\n\nNajčešće greške:\nPeta se diže - radi na mobility gležnja.\nKoljeno upada prema unutra.\nLeđa se grbe na dnu.\n\nProgresija:\nSquat na klupu (box squat) na jednoj nozi.\nPistol uz oslonac rukom za okvir vrata.\nSpori eccentric, 3-5 s spuštanja.\nPuni pistol.\n\nCilj: 3x5 po nozi čisto. Jedna jaka noga vuče gore sve ostale vježbe za noge.',
  'pistol-squat.png', 'vjezbe', 0),
 
 ('17.05.2026.', 'Handstand Push-Up program',
@@ -107,13 +97,9 @@ INSERT INTO vijesti (datum, naslov, sazetak, tekst, slika, kategorija, arhiva) V
  'L-sit izgleda jednostavno dok ga ne probaš - sjediš u zraku, ruke ravne, noge ispružene naprijed.\n\nProgresija:\nFoot-supported - guraj se s poda i podigni guzu, 3x10 s.\nOne foot up.\nTuck L-sit - koljena savijena.\nFull L-sit.\n\nRadi na paraletama ili šipkama, ima više prostora za noge. Drži ramena spuštena i guraj pod sobom.\n\nTrening svaki drugi dan, skupi oko 60 s ukupno po sesiji. Fleksibilnost stražnje lože pomaže da noge ostanu ravne.',
  'l-sit.png', 'vjezbe', 0);
 
--- ---------- Korisnici ----------
--- Admin (lozinka: admin123)
 INSERT INTO korisnik (ime, prezime, korisnicko_ime, lozinka, razina) VALUES
 ('Admin', 'User', 'admin', '$2y$10$pM4oHhjkVfE53DLO4WASeua7j/4bGVLm5g3Qifdk8N2bnNtnIoDVC', 1);
 
--- Primjeri korisnika (razina 1 = administrator, 0 = obični)
--- ivan/ivan123 (admin), marko/marko123 (obični), ana/ana123 (obični), petra/petra123 (admin)
 INSERT INTO korisnik (ime, prezime, korisnicko_ime, lozinka, razina) VALUES
 ('Ivan',  'Horvat', 'ivan',  '$2y$10$tpr0RC0tdWJBJ1Bx/AQyluKA61ARVF49WD4neMf8fuh1IadaejC.i', 1),
 ('Marko', 'Marić',  'marko', '$2y$10$AAAaAETMi.7t.26g74f0mer0DC3C.azrykVAZWreaPTlLQOhAM5p2', 0),

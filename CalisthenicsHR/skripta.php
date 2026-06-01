@@ -3,8 +3,6 @@ session_start();
 include 'connect.php';
 define('UPLPATH', 'img/');
 
-// Obrada unosa dozvoljena samo administratoru (razina 1).
-// Direktan POST neprijavljenog/običnog korisnika se odbija prije ikakvog upisa.
 $navAdmin = (isset($_SESSION['level']) && $_SESSION['level'] == 1);
 $loggedIn = isset($_SESSION['username']);
 if (!$navAdmin) {
@@ -20,8 +18,6 @@ $category = isset($_POST['category']) ? $_POST['category'] : '';
 $date     = date('d.m.Y.');
 $archive  = isset($_POST['archive']) ? 1 : 0;
 
-// Slika: prvo ručno upisan naziv (provjeren), pa sigurno učitana datoteka,
-// inače placeholder. Dozvoljene su samo slike (jpg/jpeg/png/gif).
 $picture = 'placeholder.jpg';
 if (isset($_POST['slika_naziv'])) {
     $cisto = cistNazivSlike($_POST['slika_naziv']);
@@ -34,7 +30,6 @@ if ($spremljena !== null) {
     $picture = $spremljena;
 }
 
-// Unos u bazu pomoću prepared statementa (zaštita od SQL injectiona)
 $query = "INSERT INTO vijesti (datum, naslov, sazetak, tekst, slika, kategorija, arhiva) VALUES (?, ?, ?, ?, ?, ?, ?)";
 $stmt = mysqli_stmt_init($dbc);
 if (mysqli_stmt_prepare($stmt, $query)) {

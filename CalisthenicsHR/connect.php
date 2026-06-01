@@ -1,10 +1,25 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
-$dbc = mysqli_connect('localhost', 'root', '', 'calisthenicshr')
-    or die('Error connecting to MySQL server.' . mysqli_connect_error());
-mysqli_set_charset($dbc, "utf8");
 
-// Dozvoljene slike (ekstenzija => MIME). Sve ostalo se odbija.
+$DB_CONNECT_ERROR = false;
+mysqli_report(MYSQLI_REPORT_OFF);
+$db_host = getenv('DB_HOST') ?: 'localhost';
+$db_user = getenv('DB_USER') ?: 'root';
+$db_pass = getenv('DB_PASS') ?: '';
+$db_name = getenv('DB_NAME') ?: 'calisthenicshr';
+
+try {
+    $dbc = @mysqli_connect($db_host, $db_user, $db_pass, $db_name);
+    if (!$dbc) {
+        $DB_CONNECT_ERROR = true;
+    } else {
+        mysqli_set_charset($dbc, "utf8");
+    }
+} catch (mysqli_sql_exception $e) {
+    $DB_CONNECT_ERROR = true;
+    $dbc = null;
+}
+
 $DOPUSTENE_SLIKE = array(
     'jpg'  => 'image/jpeg',
     'jpeg' => 'image/jpeg',
@@ -12,13 +27,10 @@ $DOPUSTENE_SLIKE = array(
     'gif'  => 'image/gif'
 );
 
-// Zaštita izlaza od XSS-a
 function esc($s) {
     return htmlspecialchars($s, ENT_QUOTES, 'UTF-8');
 }
 
-// Provjeri i očisti ručno upisani naziv slike.
-// Vraća siguran naziv (samo slova/brojevi/_/-/. + dopuštena ekstenzija) ili null.
 function cistNazivSlike($naziv) {
     $naziv = basename(trim($naziv));
     if (!preg_match('/^[a-zA-Z0-9_\-]+\.(jpg|jpeg|png|gif)$/i', $naziv)) {
@@ -27,9 +39,6 @@ function cistNazivSlike($naziv) {
     return $naziv;
 }
 
-// Sigurno spremanje učitane slike.
-// Provjerava ekstenziju (whitelist), stvarni MIME (getimagesize) i čisti ime.
-// Vraća naziv spremljene datoteke ili null ako upload nije valjan/dozvoljen.
 function spremiSliku($file, $uplPath) {
     global $DOPUSTENE_SLIKE;
 
@@ -37,24 +46,20 @@ function spremiSliku($file, $uplPath) {
         return null;
     }
 
-    // 1) Whitelist ekstenzije
     $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
     if (!array_key_exists($ext, $DOPUSTENE_SLIKE)) {
         return null;
     }
 
-    // 2) Datoteka mora stvarno biti slika
     $info = getimagesize($file['tmp_name']);
     if ($info === false) {
         return null;
     }
 
-    // 3) Stvarni MIME mora odgovarati dozvoljenima
     if (!in_array($info['mime'], array('image/jpeg', 'image/png', 'image/gif'), true)) {
         return null;
     }
 
-    // 4) Sigurno ime datoteke (sprječava shell.php, dvostruke ekstenzije, razmake)
     $base = preg_replace('/[^a-zA-Z0-9_\-]/', '_', pathinfo($file['name'], PATHINFO_FILENAME));
     if ($base === '') {
         $base = 'slika';

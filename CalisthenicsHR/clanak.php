@@ -3,13 +3,11 @@ session_start();
 include 'connect.php';
 define('UPLPATH', 'img/');
 
-// Tab "Unos" vidljiv samo administratoru (razina 1); Odjava vidljiva prijavljenima
 $navAdmin = (isset($_SESSION['level']) && $_SESSION['level'] == 1);
 $loggedIn = isset($_SESSION['username']);
 
 $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
-// Dohvat jednog članka pomoću prepared statementa
 $row = null;
 $query = "SELECT * FROM vijesti WHERE id=?";
 $stmt = mysqli_stmt_init($dbc);

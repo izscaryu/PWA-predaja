@@ -3,13 +3,11 @@ session_start();
 include 'connect.php';
 define('UPLPATH', 'img/');
 
-// Tab "Unos" vidljiv samo administratoru (razina 1); Odjava vidljiva prijavljenima
 $navAdmin = (isset($_SESSION['level']) && $_SESSION['level'] == 1);
 $loggedIn = isset($_SESSION['username']);
 
 $kategorija = isset($_GET['id']) ? $_GET['id'] : '';
 
-// Naziv sekcije ovisno o kategoriji
 $naslovi = array('treninzi' => 'Treninzi', 'vjezbe' => 'Vježbe');
 $naslovSekcije = isset($naslovi[$kategorija]) ? $naslovi[$kategorija] : 'Kategorija';
 ?>
