@@ -80,11 +80,4 @@ Ako ste uvezli puni `calisthenicshr.sql`, u dumpu se nalaze sample korisnici (uk
 - Ako upload slika ne radi, provjerite PHP postavke (`upload_max_filesize`, `post_max_size`) i prava nad mapom `img/`.
 - Ako se ne možete spojiti na bazu, provjerite environment varijable ili unesite kredencijale u `connect.php` za lokalno testiranje.
 
-## Kako doprinijeti
-- Forkajte repozitorij, napravite branch, implementirajte promjene i pošaljite Pull Request.
 
-## Napomene za produkciju
-- Ne držite lozinke ili osjetljive podatke u repozitoriju.
-- Koristite HTTPS i dodatne sigurnosne provjere pri radu s uploadom datoteka.
-
-Ako želite, mogu automatski committati i pushati ovaj sadržaj u vaš GitHub repo — želite li da to napravim sada?
